@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddressBook Application: Track Your Friends!</title>
+</head>
+<body>
+<h1>📘 AddressBook Application</h1>
+
+<!-- Create New Address Book Button -->
+<form th:action="@{/addressbooks/new}" method="post">
+    <button type="submit">Create New Address Book</button>
+</form>
+
+<hr/>
+
+<!-- List of Address Books -->
+<h2>Current Address Books</h2>
+<ul>
+    <li th:if="${#lists.isEmpty(addressBooks)}">No address books found.</li>
+    <li th:each="book : ${addressBooks}">
+        <a th:href="@{/view/addressbooks/{id}(id=${book.id})}" th:text="${book.name}"></a>
+    </li>
+</ul>
+</body>
+</html>
