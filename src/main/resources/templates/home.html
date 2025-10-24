@@ -3,25 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>AddressBook Application: Track Your Friends!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script th:src="@{/js/home.js}"></script>
+    <style>
+        #addressBookPopup {
+            position: absolute;
+            top: 200px;
+            left: 400px;
+            width: 400px;
+            padding: 15px;
+            border: 1px solid #aaa;
+            background-color: #fafafa;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        #editPanel {
+            display: none;
+            margin-top: 30px;
+            border-top: 2px solid #ccc;
+            padding-top: 15px;
+        }
+        .buddy-entry {
+            margin-bottom: 8px;
+        }
+
+    </style>
 </head>
 <body>
 <h1>AddressBook Application</h1>
 
-<!-- Create New Address Book Button -->
-<form th:action="@{/addressbooks/new}" method="post">
+<form id="createBookForm" th:action="@{/addressbooks/new}" method="post">
     <button type="submit">Create New Address Book</button>
 </form>
 
 <hr/>
 
-<!-- List of Address Books -->
 <h2>Current Address Books</h2>
-<ul>
-    <li th:if="${#lists.isEmpty(addressBooks)}">No address books found.</li>
+<ul id="addressBooks">
     <li th:each="book : ${addressBooks}">
         <a th:href="@{/view/addressbooks/{id}(id=${book.id})}"
+           th:attr="data-api-url=@{/addressbooks/{id}(id=${book.id})}"
            th:text="'AddressBook #' + ${book.id}"></a>
     </li>
 </ul>
+
+<!-- Popup -->
+<div id="addressBookPopup">
+    <div id="popupContent"></div>
+</div>
+
+<div id="editPanel">
+    <h3>Edit Address Book</h3>
+    <div id="buddyList"></div>
+    <form id="addBuddyForm">
+        <input type="text" id="buddyName" placeholder="Buddy Name" required/>
+        <input type="text" id="buddyPhone" placeholder="Phone Number" required/>
+        <button type="submit">Add Buddy</button>
+    </form>
+</div>
+
 </body>
 </html>
