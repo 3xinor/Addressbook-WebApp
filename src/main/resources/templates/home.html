@@ -5,7 +5,7 @@
     <title>AddressBook Application: Track Your Friends!</title>
 </head>
 <body>
-<h1>📘 AddressBook Application</h1>
+<h1>AddressBook Application</h1>
 
 <!-- Create New Address Book Button -->
 <form th:action="@{/addressbooks/new}" method="post">
@@ -19,7 +19,8 @@
 <ul>
     <li th:if="${#lists.isEmpty(addressBooks)}">No address books found.</li>
     <li th:each="book : ${addressBooks}">
-        <a th:href="@{/view/addressbooks/{id}(id=${book.id})}" th:text="${book.name}"></a>
+        <a th:href="@{/view/addressbooks/{id}(id=${book.id})}"
+           th:text="'AddressBook #' + ${book.id}"></a>
     </li>
 </ul>
 </body>
