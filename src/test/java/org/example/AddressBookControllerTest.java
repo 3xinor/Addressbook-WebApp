@@ -40,14 +40,14 @@ public class AddressBookControllerTest {
 
     @Test
     void createAddressBook() throws Exception {
-        mockMvc.perform(post("/addressbooks"))
+        mockMvc.perform(post("/addressbooks/new"))
                 .andExpect(status().isOk())
                 .andExpect((ResultMatcher) jsonPath("$.id").exists());
     }
 
     @Test
     void testAddBuddy() throws Exception {
-        String addressBookJson = mockMvc.perform(post("/addressbooks"))
+        String addressBookJson = mockMvc.perform(post("/addressbooks/new"))
                 .andReturn().getResponse().getContentAsString();
         AddressBook created = objectMapper.readValue(addressBookJson, AddressBook.class);
 
@@ -65,7 +65,7 @@ public class AddressBookControllerTest {
 
     @Test
     void testRemoveBuddy() throws Exception {
-        String addressBookJson = mockMvc.perform(post("/addressbooks"))
+        String addressBookJson = mockMvc.perform(post("/addressbooks/new"))
                 .andReturn().getResponse().getContentAsString();
         AddressBook created = objectMapper.readValue(addressBookJson, AddressBook.class);
 
@@ -88,7 +88,7 @@ public class AddressBookControllerTest {
 
     @Test
     void testGetAddressBook() throws Exception {
-        String addressBookJson = mockMvc.perform(post("/addressbooks"))
+        String addressBookJson = mockMvc.perform(post("/addressbooks/new"))
                 .andReturn().getResponse().getContentAsString();
         AddressBook created = objectMapper.readValue(addressBookJson, AddressBook.class);
 

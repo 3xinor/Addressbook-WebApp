@@ -12,7 +12,7 @@ public class AddressBookController {
     private AddressBookRepository addressBookRepository;
 
     // create a new address book
-    @PostMapping
+    @PostMapping("/new")
     public AddressBook createAddressBook() {
         return addressBookRepository.save(new  AddressBook());
     }
